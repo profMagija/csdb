@@ -14,7 +14,7 @@ Some databases (e.g. MongoDB) do not guarantee consistency. Some (like CouchDB) 
 
 This one works similar to CouchDB, but allows each transaction to specify exactly which fields it is accessing - so multiple transactions can still operate on the same data (if they observe the **multiple readers xor single writer** rule). If the transaction fails, the application can either retry it automaticaly (by recalculating everything, if there was no human interaction), or present the issue to the end user.
 
-## How it works?
+## How ?
 
 The database is entity-based, similar to MongoDB. Every entity is a list of key-value pairs, where keys are strings, and values can be any JSON-like value. However it uses a stronger, atomic storage model.
 
