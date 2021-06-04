@@ -27,6 +27,9 @@ class MemEntity(Entity):
 
     def save(self):
         self._storage._save_entity_data(self.id, self._data)
+    
+    def to_dict(self):
+        return dict(self._data)
 
 
 class MemStorage(Storage):
@@ -60,6 +63,7 @@ class MemStorage(Storage):
         cid = uuid4()
         self._changesets[cid] = changeset
         self._last_changeset = cid
+        return cid
 
     def get_changeset(self, cid: UUID) -> Changeset:
         return self._changesets[cid]

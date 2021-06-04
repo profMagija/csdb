@@ -7,22 +7,27 @@ def apply_changeset(storage, changeset: Changeset):
         ent = storage.get_entity(ecs.id)
 
         if ecs.created in (GenesisState.created, GenesisState.dead):
+            print(' ** checking that entity does not exist')
             if ent is not None:
-                # entity already exists
+                print(' !! entity already exists')
                 return False
         else:
+            print(' ** checking that entity exists')
             if ent is None:
-                # entity does not exist
+                print(' !! entity does not exist')
                 return False
 
             for name, old_value, _, propgen in ecs.props:
+                print(' ** checking property', name)
                 if propgen in (GenesisState.created, GenesisState.dead):
+                    print('   ** checking that property exists')
                     if name in ent:
-                        # the property already exists
+                        print('   !! the property already exists')
                         return False
                 else:
+                    print('   ** checking that property value matches')
                     if ent[name] != old_value:
-                        # the property does not match
+                        print('   !! the property does not match')
                         return False
 
     # apply

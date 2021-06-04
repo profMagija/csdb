@@ -24,3 +24,6 @@ class Entity:
     
     def delete(self):
         raise NotImplementedError()
+    
+    def to_dict(self):
+        raise NotImplementedError()
